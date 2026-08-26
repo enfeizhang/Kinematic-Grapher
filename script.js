@@ -131,9 +131,9 @@ function draw() {
 }
 
 function getInitPosition() {
-  initX = Xc;
-  initY = 0;
-  initZ = Zpen;
+  initX = 10;
+  initY = 190;
+  initZ = 10;
 }
 
 function getInitTemps() {
@@ -393,12 +393,6 @@ ol.appendChild(listitem)
 }
 
 
-
-const clearlistbtn = document.querySelector("#clearlist")
-
-clearlistbtn.addEventListener("click", function(){
-
-document.querySelector("#speedsol").innerHTML = ""
 
 }) 
 
