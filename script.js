@@ -373,26 +373,13 @@ userspeedbox.value = ""
 
 
 function addSpeedOl(ol, userspeed){
-
 const listitem = document.createElement("li")
-
 const listitemspeeddiv = document.createElement("div")
-
 listitemspeeddiv.innerHTML = `<p><b> Speed: </b> ${userspeed} </p>`
-
 const listitemcolordiv = document.createElement("div")
-
 listitemcolordiv.innerHTML = '<p><b> Color: </b> <input> </p>'
-
 listitem.appendChild(listitemspeeddiv)
-
 listitem.appendChild(listitemcolordiv)
-
-ol.appendChild(listitem)
-
-}
-
-
-
+ol.appendChild(listitem)}
 }) 
 
