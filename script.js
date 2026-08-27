@@ -4,6 +4,9 @@ let gcodeCheck = [
   "T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9"
 ];
 
+const zdown = 10;
+const zup = 13
+
 let initX = 10;
 let initY = 0;
 let initZ = 10;
@@ -306,10 +309,6 @@ G0 Z${zdown} F1000`
 });
 
 
-const zdown = 10;
-const zup = 13
-
-
 document.querySelector("#reset-btn").addEventListener("click", function(){
 
     const originreturnsequence = `G90
@@ -380,6 +379,6 @@ const listitemcolordiv = document.createElement("div")
 listitemcolordiv.innerHTML = '<p><b> Color: </b> <input> </p>'
 listitem.appendChild(listitemspeeddiv)
 listitem.appendChild(listitemcolordiv)
-ol.appendChild(listitem)}
-}) 
+ol.appendChild(listitem)
+}
 
