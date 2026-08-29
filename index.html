@@ -3,89 +3,120 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Distance-Time Motion Grapher</title>
+  <title>Kinematic Grapher</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.js"></script>
   <script src="p5.fab.sewing.js" type="text/javascript"></script>
   <script src="https://unpkg.com/p5-webserial@0.1.1/build/p5.webserial.js"></script>
 </head>
 
-
-
 <body>
 
   <div id="container">
-    <div class="ui-frame" id="messages">
-      <h1>Messages <span onclick="clearMsg()"><u>clear</u></span></h1>
-      <div id="message-container">
-      </div>
-    </div>
-
-    <div class="ui-frame" id="main-controller">
-      <h1>Main Controller</h1>
-
-      <div class="ui-group">
-        <div class="ui-item">
-          <div class="btn" id="connect-btn" onclick="_fab.serial.requestPort()">connect to printer</div>
-        </div>
-      </div>
-
-      <div class="ui-group">
-        <div class="ui-item">
-          <div class="btn" id="start-btn" onclick="">initialize printer</div>
-        </div>
-        <div class="ui-item">
-          <div class="btn" id="stop-btn" onclick="">stop printing</div>
-        </div>
-      </div>
-
-      <div class="ui-group">
-        <div class="ui-item">
-          <span class="label">Nozzle Temp</span> <input type="number" min="0" step="1" value="200" id="nozzle-temp">
-        </div>
-        <div class="ui-item">
-          <span class="label">Bed Temp</span> <input type="number" min="0" step="1" value="60" id="bed-temp">
-        </div>
-      </div>
-
-      <div class="ui-group">
-        <div class="ui-item">
-          <div class="btn" id="heat-btn" onclick="">heat nozzle/bed</div>
-        </div>
-        <div class="ui-item">
-          <div class="btn" id="cool-btn" onclick="">cool nozzle/bed</div>
-        </div>
-      </div>
-
-      <div class="ui-group">
-        <div class="ui-item">
-          <span class="label">Fan Speed (0&ndash;255)</span> <input type="number" min="0" step="1" value="255"
-            id="fan-speed">
-        </div>
-        <div class="ui-item">
-          <span class="label">fan on</span>
-          <input type="checkbox" id="fan-on">
-        </div>
-      </div>
-    </div>
-      <div class="ui-group">
-        <div class="ui-item">
-          <span class="label">enable cold extrusion</span>
-          <input type="checkbox" id="cold-extrusion">
-        </div>
-      </div>
     
-<div id="variable-controller">
-<input id="speed-input" placeholder="Horizontal Speed, mm/s (50-300)"> 
-<button id="axes-btn"> Draw Axes </button>
-<button id="dotline-btn"> Draw Reference Line At (? MM)</button>
-<button id="reset-btn"> Return to Origin </button>
-<button id="drawgraph-btn"> Draw Graph </button>
-<button id="penup"> Lift Pen Up</button>
-<button id="pendown"> Bring Pen Down</button>
+    <div id="top-controllers">
+      
+      <div class="ui-frame" id="messages">
+        <h1>Messages <span onclick="clearMsg()"><u>clear</u></span></h1>
+        <div id="message-container"></div>
+      </div>
+
+      <div class="ui-frame" id="main-controller">
+        <h1 class="toplabel">Main Controller</h1>
+
+        <div class="ui-group">
+          <div class="ui-item">
+            <div class="btn" id="connect-btn" onclick="_fab.serial.requestPort()">connect to printer</div>
+          </div>
+        </div>
+
+        <div class="ui-group">
+          <div class="ui-item">
+            <div class="btn" id="start-btn">initialize printer</div>
+          </div>
+          <div class="ui-item">
+            <div class="btn" id="stop-btn">stop printing</div>
+          </div>
+        </div>
+
+        <div class="ui-group">
+          <div class="ui-item">
+            <span class="label">Nozzle Temp</span>
+            <input type="number" min="0" step="1" value="200" id="nozzle-temp">
+          </div>
+          <div class="ui-item">
+            <span class="label">Bed Temp</span>
+            <input type="number" min="0" step="1" value="60" id="bed-temp">
+          </div>
+        </div>
+
+        <div class="ui-group">
+          <div class="ui-item">
+            <div class="btn" id="heat-btn">heat nozzle/bed</div>
+          </div>
+          <div class="ui-item">
+            <div class="btn" id="cool-btn">cool nozzle/bed</div>
+          </div>
+        </div>
+
+        <div class="ui-group">
+          <div class="ui-item">
+            <span class="label">Fan Speed (0&ndash;255)</span>
+            <input type="number" min="0" step="1" value="255" id="fan-speed">
+          </div>
+          <div class="ui-item">
+            <span class="label">fan on</span>
+            <input type="checkbox" id="fan-on">
+          </div>
+          <div class="ui-item">
+            <span class="label">enable cold extrusion</span>
+            <input type="checkbox" id="cold-extrusion">
+          </div>
+        </div>
+
+      </div>
     </div>
 
+    <h1 id="pagetitle">KINEMATIC GRAPHER</h1>
 
+    <div id="kinematic-controller">
+      
+      <div id="input-section">
+        <div class="input-group">
+          <span class="label">Horizontal speed (mm/s):</span>
+          <input type="number" id="speed-input" placeholder="50 - 250">
+        </div>
+        <button id="drawgraph-btn" class="btn-primary">Click to Draw Graph</button>
+      </div>
+
+      <div id="output-section">
+        
+        <div id="pencontrol">
+          <h3>Pen position control:</h3>
+          <div class="button-row">
+            <button id="penup" class="btn-sub">↑ Pen Up</button>
+            <button id="pendown" class="btn-sub">↓ Pen Down</button>
+          </div>
+          <button id="reset-btn" class="btn-sub">Return to origin</button>
+        </div>
+
+       <div id="actions-grid">
+  <div class="action-card">
+    <button id="axes-btn" class="btn-action">Click to draw axes</button>
+    <div class="img-placeholder"><img src="Axesimg.png" alt="Axes Preview"></div>
+  </div>
+
+  <div class="action-card">
+    <button id="dotline-btn" class="btn-action">Click to draw reference line</button>
+    <div class="img-placeholder"><img src="Dottedline.png" alt="Reference Line Preview"></div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <script type="text/javascript" src="script.js?v=4"></script>
 </body>
